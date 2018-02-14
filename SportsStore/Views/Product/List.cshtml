@@ -1,8 +1,17 @@
-﻿@model IQueryable<Product>
+﻿@model ProductsListViewModel
 
 <ul>
-    @foreach (var item in Model)
+    @foreach (var p in Model.Products)
     {
-        <li>@item.Name</li>
+        @await Html.PartialAsync("ProductSummary", p)
     }
 </ul>
+<pagination page-model="@Model.PagingInfo"
+            first-text="First"
+            last-text="Last"
+            previous-text="Previous"
+            next-text="Next"
+            page-action="List"
+            page-url-category="@Model.CurrentCategory"
+            class="pagination justify-content-center">
+</pagination>
